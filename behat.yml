@@ -7,8 +7,11 @@ default:
         - '%paths.base%/features'
       contexts:
         - Pizza\Context\KvartalContext:
-             - 'Гавайи'
+             - '@climate'
+             - 'Чикконэ'
              - 2
+      services:
+        climate: '\League\CLImate\CLImate'
   extensions:
     Behat\MinkExtension:
       browser_name: 'chrome'

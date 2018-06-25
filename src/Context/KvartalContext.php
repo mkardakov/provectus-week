@@ -10,6 +10,7 @@ namespace Pizza\Context;
 
 
 use Behat\MinkExtension\Context\MinkContext;
+use League\CLImate\CLImate;
 
 /**
  * Class KvartalContext
@@ -28,15 +29,21 @@ class KvartalContext extends MinkContext
      */
     private $defaultCount;
 
+    /**
+     * @var CLImate
+     */
+    private $climate;
+
 
     /**
      * KvartalContext constructor.
      * @param $pizza
      */
-    public function __construct($pizza, $count)
+    public function __construct(CLImate $CLImate, $pizza, $count)
     {
         $this->defaultPizza = $pizza;
         $this->defaultCount = $count;
+        $this->climate = $CLImate;
     }
 
     /**
@@ -92,6 +99,27 @@ class KvartalContext extends MinkContext
         }
         $node->setValue($this->defaultCount);
 
+    }
+
+    /**
+     * @Then /^I dump summary info$/
+     */
+    public function dumpSummary()
+    {
+        $page = $this->getSession()->getPage();
+        $summaryTable = $page->findAll('css', 'table.shop_table td');
+        if (empty($summaryTable)) {
+            die('Summary table is not available on a screen');
+        }
+        $cliTable = [];
+        foreach($summaryTable as $column) {
+            $cliTable[] = [
+                $column->hasAttribute('data-title') ? $column->getAttribute('data-title') : '',
+                $column->getText()
+            ];
+        }
+
+        $this->climate->table($cliTable);
     }
 
     /**
