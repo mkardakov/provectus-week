@@ -1,0 +1,18 @@
+default:
+  autoload:
+    '': '%paths.base%/src/Context'
+  suites:
+    pizza_suite:
+      paths:
+        - '%paths.base%/features'
+      contexts:
+        - Pizza\Context\KvartalContext:
+             - 'Гавайи'
+             - 2
+  extensions:
+    Behat\MinkExtension:
+      browser_name: 'chrome'
+      default_session: 'selenium2'
+      selenium2:
+        wd_host: 'http://localhost:4444/wd/hub'
+        browser: chrome
