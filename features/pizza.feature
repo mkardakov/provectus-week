@@ -1,7 +1,7 @@
 Feature: Order some pizza
-  Do you hungry?
+  Are you hungry?
 
-  @my-first-tag
+  @just-tag
   Scenario: find a pizza
     Given I am on "https://www.pizza-kvartal.com/menu/pizza/"
     Then I am searching some pizza
@@ -18,10 +18,6 @@ Feature: Order some pizza
     Then I follow "Оформить заказ"
     And I wait "1" seconds
     Then I fill in "Имя" with "Мишаня"
-    Then I fill in "Адрес" with "На кудыкину гору"
-    Then I fill in "Телефон" with "123123123"
+    And I fill in "Адрес" with "На кудыкину гору"
+    And I fill in "Телефон" with "123123123"
     And I wait "10" seconds
-#    Then I should see "Поиск"
-## Кастомные инстукции
-#    Then I am searching by input params
-#    Then I dump users

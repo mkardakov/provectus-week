@@ -88,7 +88,6 @@ class KvartalContext extends MinkContext
 
     /**
      * @Then /^I select pizza count$/
-     * @And /^I wait "(\d+)" seconds$/
      */
     public function setPizzaCount()
     {
