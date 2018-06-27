@@ -11,6 +11,8 @@ namespace Pizza\Context;
 
 use Behat\MinkExtension\Context\MinkContext;
 use League\CLImate\CLImate;
+use Pizza\Extensions\Pizza\PizzaController;
+use Pizza\OrderRegistry;
 
 /**
  * Class KvartalContext
@@ -41,8 +43,11 @@ class KvartalContext extends MinkContext
      */
     public function __construct(CLImate $CLImate, $pizza, $count)
     {
-        $this->defaultPizza = $pizza;
-        $this->defaultCount = $count;
+        $this->defaultPizza = OrderRegistry::has(PizzaController::PIZZA_NAME) ?
+            OrderRegistry::get(PizzaController::PIZZA_NAME) : $pizza;
+
+        $this->defaultCount = OrderRegistry::has(PizzaController::PIZZA_COUNT) ?
+            OrderRegistry::get(PizzaController::PIZZA_COUNT) : $count;
         $this->climate = $CLImate;
     }
 

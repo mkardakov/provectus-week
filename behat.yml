@@ -19,3 +19,4 @@ default:
       selenium2:
         wd_host: 'http://172.17.0.1:4444/wd/hub'
         browser: chrome
+    Pizza\Extensions\Pizza\PizzaExtension: ~
